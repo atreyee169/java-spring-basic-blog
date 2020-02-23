@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pluralsight.blog.data.PostRepository;
@@ -29,5 +30,12 @@ public class BlogController {
 		modelMap.put("title", "Blog Post");
 		modelMap.put("posts", allposts);
 		return "home";
+	}
+	
+	@RequestMapping("/post/{id}")
+	public String postDetails(@PathVariable Long id,ModelMap modelMap)
+	{
+		modelMap.put("post", postRepository.findById(id));
+		return "post-details";
 	}
 }
